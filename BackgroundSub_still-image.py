@@ -5,8 +5,10 @@
 '''
 
 # imports
+from functions import *
 import cv2
 import matplotlib.pyplot as plt
+
 
 video = cv2.VideoCapture(0)
 
@@ -22,13 +24,19 @@ while True:
 
     k = cv2.waitKey(1) & 0xff
     if k == 27:  # escape pressed
+        cv2.imwrite('background.jpg',bg)
+        cv2.imwrite('foreground.jpg', fg)
         break
-    elif k == 115:  # s pressed
-        background = frame
-        print('frame captured')
+    elif k == 98:  # b pressed
+        bg = frame
+        print('background captured')
+    elif k == 102:  # f pressed
+        fg = frame
+        print('foreground captured')
 
-'''
-bkgnd = cv2.imread(background)
-bkGnd = cv2.cvtColor(bkgnd, cv2.COLOR_BGR2RGB)
-plt.imshow(bkGnd)
-'''
+# taking absolute difference
+diff = cv2.absdiff(fg , bg)
+
+diff = bgrtorgb(diff)   # just to use plt
+plt.imshow(diff)
+plt.show()
