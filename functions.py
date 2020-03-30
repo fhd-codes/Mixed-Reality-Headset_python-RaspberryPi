@@ -2,6 +2,8 @@
 from IPython.display import display as ipydisplay
 import cv2
 import matplotlib.pyplot as plt
+import numpy as np
+
 
 def bgrtorgb(image):
     return cv2.cvtColor(image.copy(), cv2.COLOR_BGR2RGB)
